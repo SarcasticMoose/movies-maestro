@@ -10,5 +10,6 @@
             PrimaryColor="Purple"
             SecondaryColor="Lime" />
         <materialIcons:MaterialIconStyles />
+        <StyleInclude Source="/Controls/MenuItem.axaml" />
     </Application.Styles>
 </Application>
