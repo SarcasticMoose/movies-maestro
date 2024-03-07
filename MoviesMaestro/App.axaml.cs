@@ -2,7 +2,7 @@
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Data.Core.Plugins;
 using Avalonia.Markup.Xaml;
-
+using HotAvalonia;
 using MoviesMaestro.ViewModels;
 using MoviesMaestro.Views;
 
@@ -12,6 +12,7 @@ public partial class App : Application
 {
     public override void Initialize()
     {
+        this.EnableHotReload();
         AvaloniaXamlLoader.Load(this);
     }
 
