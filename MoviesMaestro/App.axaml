@@ -2,14 +2,18 @@
     x:Class="MoviesMaestro.App"
     xmlns="https://github.com/avaloniaui"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:materialIcons="clr-namespace:Material.Icons.Avalonia;assembly=Material.Icons.Avalonia"
-    xmlns:themes="clr-namespace:Material.Styles.Themes;assembly=Material.Styles">
+    xmlns:dialogHostAvalonia="clr-namespace:DialogHostAvalonia;assembly=DialogHost.Avalonia"
+    xmlns:local="using:MoviesMaestro"
+    xmlns:sty="using:FluentAvalonia.Styling"
+    xmlns:ui="using:FluentAvalonia.UI.Controls"
+    xmlns:uip="using:FluentAvalonia.UI.Controls.Primitives">
+
     <Application.Styles>
-        <themes:MaterialTheme
-            BaseTheme="Dark"
-            PrimaryColor="Purple"
-            SecondaryColor="Lime" />
-        <materialIcons:MaterialIconStyles />
-        <StyleInclude Source="/Controls/MenuItem.axaml" />
+        <sty:FluentAvaloniaTheme PreferSystemTheme="True" PreferUserAccentColor="True" />
+        <StyleInclude Source="/Styles/NavigationStyles.axaml" />
     </Application.Styles>
+
+    <Application.DataTemplates>
+        <local:ViewLocator />
+    </Application.DataTemplates>
 </Application>
