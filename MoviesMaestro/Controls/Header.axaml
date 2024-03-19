@@ -1,0 +1,26 @@
+<UserControl
+    x:Class="MoviesMaestro.Controls.Header"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:ui="using:FluentAvalonia.UI.Controls"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    mc:Ignorable="d">
+
+    <Grid>
+        <Button>
+            <ui:SymbolIcon Symbol="Back" />
+        </Button>
+        <Border Grid.Column="2" Padding="6">
+            <AutoCompleteBox
+                Grid.Column="1"
+                Width="300"
+                MaxWidth="500"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Watermark="Search" />
+        </Border>
+    </Grid>
+</UserControl>

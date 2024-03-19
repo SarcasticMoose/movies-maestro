@@ -1,4 +1,5 @@
 ﻿
+using Avalonia.Animation.Easings;
 using Avalonia.SimpleRouter;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
@@ -7,6 +8,7 @@ using MoviesMaestro.Models;
 using MoviesMaestro.Views;
 using System;
 using System.Collections.ObjectModel;
+using System.Reactive.Linq;
 
 namespace MoviesMaestro.ViewModels;
 
@@ -16,40 +18,52 @@ public partial class MainViewModel : ViewModelBase
     private ViewModelBase _currentPage = default!;
 
     [ObservableProperty]
-    private NavigationViewItemTemplate _actualPage;
+    private NavigationViewItemTemplate? _choosenNavigationItem;
 
-    partial void OnActualPageChanged(NavigationViewItemTemplate actualPage)
+    partial void OnChoosenNavigationItemChanged(NavigationViewItemTemplate? value)
     {
-        switch (actualPage.Tag)
+        _ = value?.Tag switch
         {
-            case "HomeViewModel":
-                _router.GoTo<HomeViewModel>();
-                break;
-            case "SettingsViewModel":
-                _router.GoTo<SettingsViewModel>();
-                break;
+            nameof(HomeViewModel) => (ViewModelBase)_router.GoTo<HomeViewModel>(),
+            nameof(MoviesViewModel) => (ViewModelBase)_router.GoTo<MoviesViewModel>(),
+            nameof(TvSeriesViewModel) => (ViewModelBase)_router.GoTo<TvSeriesViewModel>(),
+            nameof(YourListViewModel) => (ViewModelBase)_router.GoTo<YourListViewModel>(),
+            nameof(AccountViewModel) => (ViewModelBase)_router.GoTo<AccountViewModel>(),
+            nameof(SettingsViewModel) => (ViewModelBase)_router.GoTo<SettingsViewModel>(),
+            nameof(HelpViewModel) => (ViewModelBase)_router.GoTo<HelpViewModel>(),
+            _ => (ViewModelBase)_router.GoTo<NotExisting>(),
+        };
 
-        }
     }
 
+    public IObservable<ViewModelBase> WhenCurrentViewModelChange
+    {
+        get => Observable
+            .FromEvent<ViewModelBase>(h => _router.CurrentViewModelChanged += h, h => _router.CurrentViewModelChanged -= h)
+            .Select(x => x);
+    }
 
-    public ObservableCollection<NavigationViewItemTemplate> NavigationItems { get; set; } = new()
+    public ObservableCollection<NavigationViewItemTemplate> FooterNavigationItems { get; set; } = new()
+    {
+        new NavigationViewItemTemplate("Account", "Account", nameof(AccountViewModel)),
+        new NavigationViewItemTemplate("Setings", "Settings", nameof(SettingsViewModel)),
+        new NavigationViewItemTemplate("Help", "Help", nameof(HelpViewModel)),
+    };
+    public ObservableCollection<NavigationViewItemTemplate> HeaderNavigationItems { get; set; } = new()
     {
         new NavigationViewItemTemplate("Home", "Home", nameof(HomeViewModel)),
+        new NavigationViewItemTemplate("Movies", "Video", nameof(MoviesViewModel)),
+        new NavigationViewItemTemplate("TV Series", "Video", nameof(TvSeriesViewModel)),
+        new NavigationViewItemTemplate("Your List", "List", nameof(YourListViewModel)),
     };
 
-    public MainViewModel(Router<ViewModelBase> router)
+    public MainViewModel(HistoryRouter<ViewModelBase> router)
     {
         _router = router;
-        _router.CurrentViewModelChanged += _router_CurrentViewModelChanged;
+        WhenCurrentViewModelChange.Subscribe(nextViewModel => CurrentPage = nextViewModel);
         _router.GoTo<HomeViewModel>();
     }
 
-    private void _router_CurrentViewModelChanged(ViewModelBase obj)
-    {
-        CurrentPage = obj;
-    }
-
-    private readonly Router<ViewModelBase> _router;
+    private readonly HistoryRouter<ViewModelBase> _router;
 }
 

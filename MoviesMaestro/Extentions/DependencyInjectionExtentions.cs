@@ -16,7 +16,7 @@ namespace MoviesMaestro.Extentions
         public static IContainer RegisterRouter(this IContainer container)
         {
             container.RegisterDelegate(r =>
-            new Router<ViewModelBase>(t => (ViewModelBase)r.Resolve(t)), Reuse.Singleton);
+            new HistoryRouter<ViewModelBase>(t => (ViewModelBase)r.Resolve(t)), Reuse.Singleton);
 
             return container;
         }

@@ -4,10 +4,25 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:ui="using:FluentAvalonia.UI.Controls"
     xmlns:vm="clr-namespace:MoviesMaestro.ViewModels"
     d:DesignHeight="450"
     d:DesignWidth="800"
     x:DataType="vm:SettingsViewModel"
     mc:Ignorable="d">
-    <TextBlock Text="{Binding Greatings}" />
+    <ScrollViewer>
+        <StackPanel Spacing="8">
+            <ui:SettingsExpander
+                Description="Change the current app theme"
+                Header="App Theme"
+                IconSource="DarkTheme">
+
+                <ui:SettingsExpander.Footer>
+                    <ComboBox MinWidth="150" />
+                </ui:SettingsExpander.Footer>
+
+            </ui:SettingsExpander>
+        </StackPanel>
+
+    </ScrollViewer>
 </UserControl>
