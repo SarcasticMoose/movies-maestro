@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [versionize](https://github.com/versionize/versionize) for commit guidelines.
 
+<a name="1.2.0"></a>
+## [1.2.0](https://www.github.com/SarcasticMoose/movies-maestro/releases/tag/v1.2.0) (2024-03-20)
+
+### ✨ Features
+
+* add nav routing ([ff508ef](https://www.github.com/SarcasticMoose/movies-maestro/commit/ff508ef779a055ce94306a6f0619df7da1770a53))
+* create scrollable content ([7a19ee3](https://www.github.com/SarcasticMoose/movies-maestro/commit/7a19ee38912191de9fcdaa5b4c381d1007fa8542))
+
+### 👷 Build
+
+* add System.Reactive ([b24dcb3](https://www.github.com/SarcasticMoose/movies-maestro/commit/b24dcb347f014785c9e222871653fb40bebfab01))
+
 <a name="1.1.0"></a>
 ## [1.1.0](https://www.github.com/SarcasticMoose/movies-maestro/releases/tag/v1.1.0) (2024-03-07)
 
