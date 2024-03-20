@@ -1,16 +1,13 @@
-<Window
-    x:Class="MoviesMaestro.Views.MainWindow"
+<UserControl
+    x:Class="MoviesMaestro.Views.HomeView"
     xmlns="https://github.com/avaloniaui"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:views="clr-namespace:MoviesMaestro.Views"
-    xmlns:vm="using:MoviesMaestro.ViewModels"
-    Title="MoviesMaestro"
+    xmlns:vm="clr-namespace:MoviesMaestro.ViewModels"
     d:DesignHeight="450"
     d:DesignWidth="800"
-    ExtendClientAreaToDecorationsHint="True"
-    Icon="/Assets/avalonia-logo.ico"
+    x:DataType="vm:HomeViewModel"
     mc:Ignorable="d">
-    <views:MainView />
-</Window>
+    <TextBlock Text="{Binding Greatings}" />
+</UserControl>
