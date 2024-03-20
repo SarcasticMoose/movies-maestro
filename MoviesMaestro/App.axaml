@@ -9,8 +9,9 @@
     xmlns:uip="using:FluentAvalonia.UI.Controls.Primitives">
 
     <Application.Styles>
-        <sty:FluentAvaloniaTheme PreferSystemTheme="True" PreferUserAccentColor="True" />
+        <sty:FluentAvaloniaTheme/>
         <StyleInclude Source="/Styles/NavigationStyles.axaml" />
+        <StyleInclude Source="/Styles/NavigationHeaderStyles.axaml" />
     </Application.Styles>
 
     <Application.DataTemplates>

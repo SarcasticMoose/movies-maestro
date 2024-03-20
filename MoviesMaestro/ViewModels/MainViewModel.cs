@@ -24,14 +24,14 @@ public partial class MainViewModel : ViewModelBase
     {
         _ = value?.Tag switch
         {
-            nameof(HomeViewModel) => (ViewModelBase)_router.GoTo<HomeViewModel>(),
-            nameof(MoviesViewModel) => (ViewModelBase)_router.GoTo<MoviesViewModel>(),
-            nameof(TvSeriesViewModel) => (ViewModelBase)_router.GoTo<TvSeriesViewModel>(),
-            nameof(YourListViewModel) => (ViewModelBase)_router.GoTo<YourListViewModel>(),
-            nameof(AccountViewModel) => (ViewModelBase)_router.GoTo<AccountViewModel>(),
-            nameof(SettingsViewModel) => (ViewModelBase)_router.GoTo<SettingsViewModel>(),
-            nameof(HelpViewModel) => (ViewModelBase)_router.GoTo<HelpViewModel>(),
-            _ => (ViewModelBase)_router.GoTo<NotExisting>(),
+            nameof(HomeViewModel) => _router?.GoTo<HomeViewModel>() as ViewModelBase,
+            nameof(MoviesViewModel) => _router?.GoTo<MoviesViewModel>() as ViewModelBase,
+            nameof(TvSeriesViewModel) => _router?.GoTo<TvSeriesViewModel>() as ViewModelBase,
+            nameof(YourListViewModel) => _router?.GoTo<YourListViewModel>() as ViewModelBase,
+            nameof(AccountViewModel) => _router?.GoTo<AccountViewModel>() as ViewModelBase,
+            nameof(SettingsViewModel) => _router?.GoTo<SettingsViewModel>() as ViewModelBase,
+            nameof(HelpViewModel) => _router?.GoTo<HelpViewModel>() as ViewModelBase,
+            _ => _router?.GoTo<NotExisting>() as ViewModelBase,
         };
 
     }
@@ -39,7 +39,7 @@ public partial class MainViewModel : ViewModelBase
     public IObservable<ViewModelBase> WhenCurrentViewModelChange
     {
         get => Observable
-            .FromEvent<ViewModelBase>(h => _router.CurrentViewModelChanged += h, h => _router.CurrentViewModelChanged -= h)
+            .FromEvent<ViewModelBase>(h => _router!.CurrentViewModelChanged += h, h => _router!.CurrentViewModelChanged -= h)
             .Select(x => x);
     }
 
@@ -64,6 +64,7 @@ public partial class MainViewModel : ViewModelBase
         _router.GoTo<HomeViewModel>();
     }
 
-    private readonly HistoryRouter<ViewModelBase> _router;
+
+    private readonly HistoryRouter<ViewModelBase>? _router;
 }
 

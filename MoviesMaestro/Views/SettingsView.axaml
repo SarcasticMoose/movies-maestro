@@ -5,24 +5,11 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:ui="using:FluentAvalonia.UI.Controls"
+    xmlns:uip="using:FluentAvalonia.UI.Controls.Primitives"
     xmlns:vm="clr-namespace:MoviesMaestro.ViewModels"
     d:DesignHeight="450"
     d:DesignWidth="800"
     x:DataType="vm:SettingsViewModel"
     mc:Ignorable="d">
-    <ScrollViewer>
-        <StackPanel Spacing="8">
-            <ui:SettingsExpander
-                Description="Change the current app theme"
-                Header="App Theme"
-                IconSource="DarkTheme">
-
-                <ui:SettingsExpander.Footer>
-                    <ComboBox MinWidth="150" />
-                </ui:SettingsExpander.Footer>
-
-            </ui:SettingsExpander>
-        </StackPanel>
-
-    </ScrollViewer>
+    <TextBlock>Settings</TextBlock>
 </UserControl>

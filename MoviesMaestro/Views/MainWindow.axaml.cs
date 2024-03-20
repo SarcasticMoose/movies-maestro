@@ -9,8 +9,8 @@ public partial class MainWindow : AppWindow
     {
         InitializeComponent();
 
-        TitleBar.ExtendsContentIntoTitleBar = true;
         TitleBar.TitleBarHitTestType = TitleBarHitTestType.Complex;
+        TitleBar.ExtendsContentIntoTitleBar = true;
     }
 
 }
