@@ -2,7 +2,7 @@
 
 namespace MoviesMaestro.ViewModels
 {
-    public partial class NotExisting : ViewModelBase
+    public partial class NotExistingViewModel : ViewModelBase
     {
         [ObservableProperty]
         public string? _error;

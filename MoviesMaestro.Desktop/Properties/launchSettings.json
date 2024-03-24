@@ -1,0 +1,23 @@
+{
+  "profiles": {
+    "WSL": {
+      "commandName": "WSL2",
+      "environmentVariables": {
+        "NET_ENVIROMENT": "Production"
+      },
+      "distributionName": ""
+    },
+    "MoviesMaestro.Desktop Production": {
+      "commandName": "Project",
+      "environmentVariables": {
+        "NET_ENVIRONMENT": "Production"
+      }
+    },
+    "MoviesMaestro.Desktop Debug": {
+      "commandName": "Project",
+      "environmentVariables": {
+        "NET_ENVIRONMENT": "Debug"
+      }
+    }
+  }
+}

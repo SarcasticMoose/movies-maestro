@@ -4,6 +4,7 @@ using Avalonia.SimpleRouter;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using FluentAvalonia.UI.Controls;
+using Microsoft.Extensions.Logging;
 using MoviesMaestro.Models;
 using MoviesMaestro.Views;
 using System;
@@ -14,27 +15,13 @@ namespace MoviesMaestro.ViewModels;
 
 public partial class MainViewModel : ViewModelBase
 {
+    #region Observables Properties
     [ObservableProperty]
     private ViewModelBase _currentPage = default!;
 
     [ObservableProperty]
     private NavigationViewItemTemplate? _choosenNavigationItem;
-
-    partial void OnChoosenNavigationItemChanged(NavigationViewItemTemplate? value)
-    {
-        _ = value?.Tag switch
-        {
-            nameof(HomeViewModel) => _router?.GoTo<HomeViewModel>() as ViewModelBase,
-            nameof(MoviesViewModel) => _router?.GoTo<MoviesViewModel>() as ViewModelBase,
-            nameof(TvSeriesViewModel) => _router?.GoTo<TvSeriesViewModel>() as ViewModelBase,
-            nameof(YourListViewModel) => _router?.GoTo<YourListViewModel>() as ViewModelBase,
-            nameof(AccountViewModel) => _router?.GoTo<AccountViewModel>() as ViewModelBase,
-            nameof(SettingsViewModel) => _router?.GoTo<SettingsViewModel>() as ViewModelBase,
-            nameof(HelpViewModel) => _router?.GoTo<HelpViewModel>() as ViewModelBase,
-            _ => _router?.GoTo<NotExisting>() as ViewModelBase,
-        };
-
-    }
+    #endregion
 
     public IObservable<ViewModelBase> WhenCurrentViewModelChange
     {
@@ -49,6 +36,7 @@ public partial class MainViewModel : ViewModelBase
         new NavigationViewItemTemplate("Setings", "Settings", nameof(SettingsViewModel)),
         new NavigationViewItemTemplate("Help", "Help", nameof(HelpViewModel)),
     };
+
     public ObservableCollection<NavigationViewItemTemplate> HeaderNavigationItems { get; set; } = new()
     {
         new NavigationViewItemTemplate("Home", "Home", nameof(HomeViewModel)),
@@ -57,14 +45,37 @@ public partial class MainViewModel : ViewModelBase
         new NavigationViewItemTemplate("Your List", "List", nameof(YourListViewModel)),
     };
 
-    public MainViewModel(HistoryRouter<ViewModelBase> router)
+    partial void OnChoosenNavigationItemChanged(NavigationViewItemTemplate? value)
     {
-        _router = router;
-        WhenCurrentViewModelChange.Subscribe(nextViewModel => CurrentPage = nextViewModel);
-        _router.GoTo<HomeViewModel>();
+        _ = value?.Tag switch
+        {
+            nameof(HomeViewModel) => _router?.GoTo<HomeViewModel>() as ViewModelBase,
+            nameof(MoviesViewModel) => _router?.GoTo<MoviesViewModel>() as ViewModelBase,
+            nameof(TvSeriesViewModel) => _router?.GoTo<TvSeriesViewModel>() as ViewModelBase,
+            nameof(YourListViewModel) => _router?.GoTo<YourListViewModel>() as ViewModelBase,
+            nameof(AccountViewModel) => _router?.GoTo<AccountViewModel>() as ViewModelBase,
+            nameof(SettingsViewModel) => _router?.GoTo<SettingsViewModel>() as ViewModelBase,
+            nameof(HelpViewModel) => _router?.GoTo<HelpViewModel>() as ViewModelBase,
+            _ => _router?.GoTo<NotExistingViewModel>() as ViewModelBase,
+        };
+
     }
 
+    public MainViewModel(HistoryRouter<ViewModelBase> router, ILogger<MainViewModel> logger)
+    {
+        _router = router;
+        _logger = logger;
+
+        Initialize();
+    }
+
+    private void Initialize()
+    {
+        _router?.GoTo<HomeViewModel>();
+        WhenCurrentViewModelChange.Subscribe(nextViewModel => CurrentPage = nextViewModel);
+    }
 
     private readonly HistoryRouter<ViewModelBase>? _router;
+    private readonly ILogger<MainViewModel> _logger;
 }
 

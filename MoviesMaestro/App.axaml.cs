@@ -2,21 +2,25 @@
 using Avalonia.Controls;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Data.Core.Plugins;
+using Avalonia.Logging;
 using Avalonia.Markup.Xaml;
 using Avalonia.Styling;
 using DryIoc;
-using HotAvalonia;
+using Microsoft.Extensions.Logging;
 using MoviesMaestro.Extentions;
+using MoviesMaestro.Providers;
 using MoviesMaestro.ViewModels;
 using MoviesMaestro.Views;
+using System.Xml.Linq;
 
 namespace MoviesMaestro;
 
 public partial class App : Application
 {
+    private IContainer? _container;
+
     public override void Initialize()
     {
-        this.EnableHotReload();
         AvaloniaXamlLoader.Load(this);
 
         if (Design.IsDesignMode)
@@ -27,16 +31,10 @@ public partial class App : Application
 
     public override void OnFrameworkInitializationCompleted()
     {
-        // Line below is needed to remove Avalonia data validation.
-        // Without this line you will get duplicate validations from both Avalonia and CT
         BindingPlugins.DataValidators.RemoveAt(0);
 
-        IContainer container = new Container();
+        var mainViewModel = _container.Resolve<MainViewModel>();
 
-        container.RegisterRouter();
-        container.RegisterViewModels();
-
-        var mainViewModel = container.Resolve<MainViewModel>();
 
         if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
         {
@@ -54,5 +52,18 @@ public partial class App : Application
         }
 
         base.OnFrameworkInitializationCompleted();
+    }
+
+    public override void RegisterServices()
+    {
+        _container = new ContainerProvider().Get();
+
+        _container?.RegisterFileSystem();
+        _container?.RegisterProviders();
+        _container?.RegisterLogger();
+        _container?.RegisterRouter();
+        _container?.RegisterViewModels();
+
+        base.RegisterServices();
     }
 }

@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
 		<TargetFramework>net7.0</TargetFramework>
@@ -19,14 +20,22 @@
 	<ItemGroup>
 		<PackageReference Condition="$(DefineConstants.Contains(ENABLE_XAML_HOT_RELOAD))" Include="Avalonia.Markup.Xaml.Loader" Version="11.0.10" />
 		<PackageReference Include="DialogHost.Avalonia" Version="0.7.7" />
-		<PackageReference Include="DryIoc" Version="5.4.3" />
+		<PackageReference Include="DryIoc.Microsoft.DependencyInjection" Version="6.2.0" />
 		<PackageReference Condition="$(DefineConstants.Contains(ENABLE_XAML_HOT_RELOAD))" Include="HotAvalonia" Version="1.0.1" />
 		<PackageReference Condition="$(DefineConstants.Contains(ENABLE_XAML_HOT_RELOAD))" Include="HotAvalonia.Extensions" Version="1.0.1" />
+		<PackageReference Include="Microsoft.Extensions.Configuration" Version="7.0.0" />
+		<PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="7.0.0" />
+	</ItemGroup>
+	<!--Serilog-->
+	<ItemGroup>
+		<PackageReference Include="Serilog" Version="3.1.1" />
+		<PackageReference Include="Serilog.Settings.Configuration" Version="7.0.0" />
+		<PackageReference Include="Serilog.Extensions.Logging" Version="7.0.0" />
+		<PackageReference Include="Serilog.Sinks.File" Version="5.0.0" />
 	</ItemGroup>
 	<!--Fluent UI-->
 	<ItemGroup>
 		<PackageReference Include="FluentAvaloniaUI" Version="2.0.5" />
-		<PackageReference Include="FluentIcons.Avalonia" Version="1.1.227" />
 	</ItemGroup>
 	<!--Main Packages-->
 	<ItemGroup>
@@ -37,6 +46,19 @@
 		<PackageReference Include="Sandreas.Avalonia.SimpleRouter" Version="0.0.4" />
 	</ItemGroup>
 	<ItemGroup>
-	  <Folder Include="Controls\" />
+		<Folder Include="Assets\" />
+		<Folder Include="Controls\" />
+		<Folder Include="Logging\" />
+	</ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\MovieMaestro.Core\MoviesMaestro.Core.csproj" />
+	</ItemGroup>
+	<ItemGroup>
+		<None Update="appsettings.Production.json">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</None>
+		<None Update="appsettings.Development.json">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</None>
 	</ItemGroup>
 </Project>

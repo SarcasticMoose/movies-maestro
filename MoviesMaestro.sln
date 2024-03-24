@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MoviesMaestro", "MoviesMaes
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MoviesMaestro.Desktop", "MoviesMaestro.Desktop\MoviesMaestro.Desktop.csproj", "{B9DE5B00-C840-44BA-8E0B-B4DFCBF3031D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MoviesMaestro.Core", "MovieMaestro.Core\MoviesMaestro.Core.csproj", "{27A13BA6-76D6-4A4F-9D81-702A1437E8B5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{B9DE5B00-C840-44BA-8E0B-B4DFCBF3031D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B9DE5B00-C840-44BA-8E0B-B4DFCBF3031D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B9DE5B00-C840-44BA-8E0B-B4DFCBF3031D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{27A13BA6-76D6-4A4F-9D81-702A1437E8B5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{27A13BA6-76D6-4A4F-9D81-702A1437E8B5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{27A13BA6-76D6-4A4F-9D81-702A1437E8B5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{27A13BA6-76D6-4A4F-9D81-702A1437E8B5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
